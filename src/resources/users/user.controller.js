@@ -1,12 +1,16 @@
-import { crudControllers } from "../../utils/crud.js";
-import { User } from "./user.model";
+import { crudControllers } from '../../utils/crud.js';
+import { User } from './user.model';
 
 export default {
     ...crudControllers(User),
-    getCount(_, res) {
-        let count = User.count()
-        return res.status(200).send({
-            count
-        })
-    }
+    async getCount(_, res) {
+        try {
+            let count = await User.countDocuments();
+            return res.status(200).send({
+                count,
+            });
+        } catch (error) {
+            res.status(400).end();
+        }
+    },
 };
