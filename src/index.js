@@ -1,6 +1,5 @@
-import env from 'dotenv'
-env.config()
-import { start } from "./server";
+import env from 'dotenv';
+env.config();
+import { start } from './server';
 
-
-start(3000)
+start(process.env.PORT || 3000);
